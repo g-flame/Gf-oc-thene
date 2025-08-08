@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <info>
-	<id>theme-example</id>
-	<name>Example ownCloud Theme</name>
-	<description>This App provides the example ownCloud theme.</description>
-	<licence>AGPL</licence>
-	<author>Philipp Schaffrath</author>
-	<version>1.0.0</version>
-	<types>
-		<theme/>
-	</types>
-	<dependencies>
-		<owncloud min-version="10.2" max-version="10" />
-	</dependencies>
-	<namespace>Theme</namespace>
+    <id>Welp</id>
+    <name>NexusCloud Modern Dark Theme</name>
+    <description>Ultra-modern dark theme with glassmorphism effects</description>
+    <licence>MIT</licence>
+    <author>g-flame</author>
+    <version>1.0.0</version>
+    <namespace>YourThemeName</namespace>
+    <category>theme</category>
+    <dependencies>
+        <owncloud min-version="10.0" max-version="10.99" />
+    </dependencies>
 </info>
