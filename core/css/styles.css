@@ -1,142 +1,450 @@
 /**
- * @author Jan-Christoph Borchardt, http://jancborchardt.net
- * @copyright Copyright (c) 2018, ownCloud GmbH
+ * @author Enhanced Modern Dark Theme
+ * @copyright Copyright (c) 2024, Modern UI Enhancement
  * @license AGPL-3.0
  *
- * This code is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License, version 3,
- * as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License, version 3,
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ * Ultra-modern dark theme with glassmorphism, smooth animations,
+ * and contemporary design patterns for ownCloud
  */
 
+:root {
+  /* Modern Dark Color Palette */
+  --primary-bg: #0a0a0f;
+  --secondary-bg: #1a1a24;
+  --accent-bg: #2d2d3a;
+  --glass-bg: rgba(45, 45, 58, 0.6);
+  --primary-purple: #8b5cf6;
+  --accent-purple: #a78bfa;
+  --neon-purple: #c084fc;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #3b82f6 100%);
+  --gradient-accent: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
 
-/* header color */
-/* this is the main brand color */
+/* Smooth scrolling and base improvements */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* Header with glassmorphism effect */
 #body-user #header,
 #body-settings #header,
 #body-public #header {
-	background-color: #745bca;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+  position: relative;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* log in screen background color and image */
-/* gradient of the header color and a brighter shade */
-/* can also be a flat color or an image */
+#body-user #header::before,
+#body-settings #header::before,
+#body-public #header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-glass);
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* Animated login screen with particle effect */
 #body-login {
-	/* Login background image */
-	background-image: url("../img/background.jpg") !important;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	/* End of using background image */
-	background: #745bca; /* Old browsers */
-	background: -moz-linear-gradient(top, #947bea 0%, #745bca 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#947bea), color-stop(100%,#745bca)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #947bea 0%,#745bca 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #947bea 0%,#745bca 100%); /* Opera11.10+ */
-	background: -ms-linear-gradient(top, #947bea 0%,#745bca 100%); /* IE10+ */
-	background: linear-gradient(top, #947bea 0%,#745bca 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#947bea', endColorstr='#745bca',GradientType=0 ); /* IE6-9 */
+  background: var(--primary-bg);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  animation: gradientShift 15s ease infinite;
 }
 
-/* >= ownCloud 10.8 - login button */
-/* styling of the login button which was introduced with ownCloud 10.8 */
-#alternative-logins li a.button, html #body-login input[type="submit"], html #body-login button[type="submit"] {
-  background-color: #745bca;
-  color: #fff; /* color of the text */
-  border: 1px solid #fff;
-}
-/* style for the hovered state of the button */
-#alternative-logins li a.button:hover, html #body-login input[type="submit"]:hover, html #body-login button[type="submit"]:hover {
-	background-color: #947bea;
-	color: #fff; /* color of the text */
-  border: 1px solid #fff;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-/* style legal and copyright text */
-/* styling of the info text of the login page on the button. */
-/* the color of the p.info part is also the color of the text above the credential fields (used by ownCloud >= 10.8) */
-/* also the color of error messages will be changed to the provided value */
-#body-login p.info, #body-login .warning, #body-login .update, #body-login .error, #body-login #showAdvanced {
-  color: #fff;
-}
-/* legal and copyright text (Link) */
-#body-login p.info a, #body-login .update a, #body-login form fieldset legend, #body-login #datadirContent label {
-  color: #fff;
+/* Floating particles animation */
+#body-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(167, 139, 250, 0.2), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(99, 102, 241, 0.1), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particles 20s linear infinite;
+  opacity: 0.6;
 }
 
-/* primary action button, use sparingly */
-/* header color as border, brighter shade again, here as background */
+@keyframes particles {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* Modern glassmorphic login buttons */
+#alternative-logins li a.button, 
+html #body-login input[type="submit"], 
+html #body-login button[type="submit"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#alternative-logins li a.button::before,
+html #body-login input[type="submit"]::before,
+html #body-login button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: left 0.3s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+#alternative-logins li a.button:hover,
+html #body-login input[type="submit"]:hover,
+html #body-login button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+  border-color: var(--accent-purple);
+}
+
+#alternative-logins li a.button:hover::before,
+html #body-login input[type="submit"]:hover::before,
+html #body-login button[type="submit"]:hover::before {
+  left: 0;
+  opacity: 0.9;
+}
+
+#alternative-logins li a.button:active,
+html #body-login input[type="submit"]:active,
+html #body-login button[type="submit"]:active {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced text styling with better contrast */
+#body-login p.info, 
+#body-login .warning, 
+#body-login .update, 
+#body-login .error, 
+#body-login #showAdvanced {
+  color: var(--text-secondary);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+#body-login p.info a, 
+#body-login .update a, 
+#body-login form fieldset legend, 
+#body-login #datadirContent label {
+  color: var(--accent-purple);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#body-login p.info a:hover,
+#body-login .update a:hover {
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+}
+
+/* Ultra-modern primary buttons with glow effect */
 .primary,
 input[type="submit"].primary,
 input[type="button"].primary,
 button.primary,
-.button.primary,
-.primary:active,
-input[type="submit"].primary:active,
-input[type="button"].primary:active,
-button.primary:active,
-.button.primary:active {
-	border-color: #745bca;
-	background-color: #947bea;
+.button.primary {
+  background: var(--gradient-primary);
+  border: 1px solid var(--accent-purple);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 10px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 15px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+
+.primary::after,
+input[type="submit"].primary::after,
+input[type="button"].primary::after,
+button.primary::after,
+.button.primary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
 .primary:hover,
 input[type="submit"].primary:hover,
 input[type="button"].primary:hover,
 button.primary:hover,
-.button.primary:hover,
+.button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 25px rgba(139, 92, 246, 0.4),
+    0 0 20px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.primary:hover::after,
+input[type="submit"].primary:hover::after,
+input[type="button"].primary:hover::after,
+button.primary:hover::after,
+.button.primary:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
 .primary:focus,
 input[type="submit"].primary:focus,
 input[type="button"].primary:focus,
 button.primary:focus,
 .button.primary:focus {
-	background-color: #8b75e4;
-}
-.primary:active, input[type="submit"].primary:active, input[type="button"].primary:active, button.primary:active, .button.primary:active,
-.primary:disabled, input[type="submit"].primary:disabled, input[type="button"].primary:disabled, button.primary:disabled, .button.primary:disabled,
-.primary:disabled:hover, input[type="submit"].primary:disabled:hover, input[type="button"].primary:disabled:hover, button.primary:disabled:hover, .button.primary:disabled:hover,
-.primary:disabled:focus, input[type="submit"].primary:disabled:focus, input[type="button"].primary:disabled:focus, button.primary:disabled:focus, .button.primary:disabled:focus {
-	background-color: #745bca;
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(139, 92, 246, 0.3),
+    0 4px 15px rgba(139, 92, 246, 0.2);
 }
 
-/* use logos from theme */
+.primary:active,
+input[type="submit"].primary:active,
+input[type="button"].primary:active,
+button.primary:active,
+.button.primary:active {
+  transform: translateY(-1px);
+  transition: transform 0.1s ease;
+}
+
+.primary:disabled,
+input[type="submit"].primary:disabled,
+input[type="button"].primary:disabled,
+button.primary:disabled,
+.button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Modern logo styling */
 #header .logo {
-	background-image: url('../img/logo.svg');
-	width: 250px;
-	height: 121px;
-}
-#header .logo-icon {
-	background-image: url('../img/logo-icon.svg');
-	height: 34px;
-	line-height: initial;
-}
-#owncloud {
-	padding: 3px;
+  background-image: url('../img/logo.svg');
+  width: 200px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
 }
 
-/* show Claim */
-#body-user #logo-claim  {
-	display: initial !important;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	padding-top: 17px;
-	padding-left: 170px;
-	height: 45px;
+#header .logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.3));
 }
+
+#header .logo-icon {
+  background-image: url('../img/logo-icon.svg');
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+}
+
+#owncloud {
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+#owncloud:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+/* Animated claim text */
+#body-user #logo-claim {
+  display: initial !important;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 15px;
+  padding-left: 120px;
+  height: 50px;
+  opacity: 0;
+  animation: fadeInSlide 1s ease 0.5s forwards;
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 #body-user #logo-claim a {
-	color: #fff;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  position: relative;
 }
-/* hide on small screens */
+
+#body-user #logo-claim a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-purple);
+  transition: width 0.3s ease;
+}
+
+#body-user #logo-claim a:hover {
+  color: var(--accent-purple);
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+#body-user #logo-claim a:hover::after {
+  width: 100%;
+}
+
+/* Enhanced responsive design */
 @media only screen and (max-width: 767px) {
-	#body-user #logo-claim  {
-		display: none !important;
-	}
+  #body-user #logo-claim {
+    display: none !important;
+  }
+  
+  #header .logo {
+    width: 150px;
+    height: 40px;
+  }
+  
+  #alternative-logins li a.button,
+  html #body-login input[type="submit"],
+  html #body-login button[type="submit"] {
+    width: 100%;
+    padding: 14px 20px;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #body-login {
+    padding: 20px 15px;
+  }
+  
+  #header .logo {
+    width: 120px;
+    height: 35px;
+  }
+}
+
+/* Additional modern enhancements */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-purple);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--primary-purple);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--primary-purple);
+  color: var(--text-primary);
 }
